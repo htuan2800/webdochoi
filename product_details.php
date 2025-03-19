@@ -94,7 +94,7 @@
             } else {
                 $quantity_form = '
                                     <h6 class="mb-1">Quantity</h6>
-                                    <input onblur="checkEmptyProductOrder()" type="number" min="1" max="100" value="1" name="Quantity" id="p-quantity">
+                                    <input onblur="checkEmptyProductOrder()" type="number" min="1" max="10000" value="1" name="Quantity" id="p-quantity">
                 ';
             }
 
@@ -163,7 +163,10 @@
         let ad_pr = document.getElementById('add-cart');
         ad_pr.addEventListener('submit', (e) => {
             e.preventDefault();
-
+            if (Number(ad_pr.elements['Quantity'].value) > Number(ad_pr.elements['inventory'].value)) {
+                toast('warning', "Kho không đủ số lượng bạn yêu cầu");
+                return;
+            }
             let data = new FormData();
             data.append('ProductID', ad_pr.elements['ProductID'].value);
             data.append('ProductName', ad_pr.elements['ProductName'].value);
