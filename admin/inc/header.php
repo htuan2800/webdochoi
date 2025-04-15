@@ -59,7 +59,7 @@ $con = mysqli_connect($hname, $uname, $pass, $db);
                                             <a class="nav-link text-white" href="products.php">Products</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link text-white" href="statisticsImport.php">StatisticsImport</a>
+                                            <a class="nav-link text-white" href="statisticsImport.php">Statistics Import</a>
                                         </li>
                                     ';
                             break;

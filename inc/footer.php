@@ -16,8 +16,8 @@
         <div class="col-lg-4 p-4">
             <h5 class="mb-3">Follow us</h5>
             <a href="https://x.com/" class="d-inline-block text-dark text-decoration-none mb-2">
-                    <i class="bi bi-twitter-x"></i> Twitter
-                    </a><br>
+                <i class="bi bi-twitter-x"></i> Twitter
+            </a><br>
             <a href="https://www.facebook.com/" class="d-inline-block text-dark text-decoration-none mb-2">
                 <i class="bi bi-facebook"></i> Facebook
             </a><br>
@@ -184,17 +184,17 @@
         data.append('email', forgot_form.elements['email'].value);
         data.append('forgot_pass', '');
 
-        
+
 
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "ajax/mail_service.php", true);
         // Show/hide spinner
         xhr.onload = function() {
             if (this.responseText == 0) {
-                document.getElementById('forgotSpinner').style.display = 'none';  // Hide
+                document.getElementById('forgotSpinner').style.display = 'none'; // Hide
                 toast('error', "Email not found!");
             } else if (this.responseText == 1) {
-                document.getElementById('forgotSpinner').style.display = 'none';  // Hide
+                document.getElementById('forgotSpinner').style.display = 'none'; // Hide
                 var myModal = document.getElementById('forgotModal');
                 var modal = bootstrap.Modal.getInstance(myModal);
                 modal.hide();
@@ -239,19 +239,19 @@
         e.preventDefault();
         let pattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
         if (pattern.test(reset_form.elements['pass'].value)) {
-            if(reset_form.elements['pass'].value == reset_form.elements['cpass'].value) {
+            if (reset_form.elements['pass'].value == reset_form.elements['cpass'].value) {
                 let data = new FormData();
                 data.append('pass', reset_form.elements['pass'].value);
                 data.append('cpass', reset_form.elements['cpass'].value);
                 data.append('reset_pass', '');
-        
+
                 var myModal = document.getElementById('resetpassModal');
                 var modal = bootstrap.Modal.getInstance(myModal);
                 modal.hide();
-        
+
                 let xhr = new XMLHttpRequest();
                 xhr.open("POST", "ajax/mail_service.php", true);
-        
+
                 xhr.onload = function() {
                     if (this.responseText == 0) {
                         alert('Server down!');
@@ -279,9 +279,28 @@
     }
 
     // Gọi khi load trang để cập nhật số lượng giỏ hàng
-    
+
     setActive();
     document.addEventListener("DOMContentLoaded", function() {
-        countCart(); 
+        countCart();
     });
+
+    function cancelOrder(bill_id) {
+        if (confirm("Bạn có chắc chắn muốn hủy đơn hàng này không?")) {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "ajax/bill.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            xhr.onload = function() {
+                if (this.responseText == 1) {
+                    toast('success', "Hủy đơn thành công!");
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1000);
+                }
+            }
+
+            xhr.send("bill_id=" + bill_id);
+        }
+    }
 </script>

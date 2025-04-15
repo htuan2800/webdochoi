@@ -358,6 +358,7 @@
                     $formatted_subtotal=number_format($row2['Subtotal'], 0, ',', '.');
                     $formatted_sale=number_format($sale, 0, ',', '.');
                     $formatted_total=number_format($row2['Total'], 0, ',', '.');
+                    $statusBill=$row2['status'];
                     $dataBill = "
                          <div class='card-body m-2 p-4 border rounded-3 shadow-sm bg-light'>
                             <div class='d-flex justify-content-between align-items-center border-bottom pb-2 mb-2'>
@@ -429,7 +430,17 @@
 
             ?>
 
+            <?php
+                if($statusBill=="Đã Đặt")
+                {
+
+                    echo <<< data
+                        <button type="button" class="btn btn-danger" id="cancel-order" onClick=cancelOrder($data[bill_id])>Hủy đơn</button>
+                    data;
+                }
+            ?>
         </div>
+
     </div>
 
     <?php require('inc/footer.php'); ?>

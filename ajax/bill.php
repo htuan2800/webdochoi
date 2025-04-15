@@ -1,6 +1,7 @@
 <?php
 require('../admin/inc/db_config.php');
 require('../admin/inc/essentials.php');
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 session_start();
 if (isset($_POST['add_bill'])) {
     $data = filteration($_POST);
@@ -88,5 +89,16 @@ if (isset($_POST['add_bill'])) {
         }
     } else {
         echo 'Server Down!';
+    }
+}
+
+
+if(isset($_POST['bill_id']))
+{
+    $updateDate = date('Y-m-d');
+    if(update("UPDATE `bill` set `UpdateTime`=?, `status`=? WHERE `BillID`=?",[$updateDate,'Đã Hủy',$_POST['bill_id']],'ssi')){
+        echo 1;
+    } else {
+        echo 0;
     }
 }
