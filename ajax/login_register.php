@@ -29,9 +29,9 @@ if (isset($_POST['register'])) {
 
     $enc_pass = password_hash($data['pass'], PASSWORD_BCRYPT);
     $createAt=date('Y-m-d');
-    $query1 = "INSERT INTO `user`(`UserName`, `Password`, `RoleID`, `FullName`,`Phone`, `Email`, `Gender`, `Address`,`IMG`, `create_at`) VALUES (?,?,?,?,?,?,?,?,?,?)";
-    $values1 = [$data['username'], $enc_pass, 1, $data['FullName'], $data['phonenum'], $data['email'], $data['gender'], $data['address'], NULL, $createAt];
-    if (insert($query1, $values1, 'ssisssssss')) {
+    $query1 = "INSERT INTO `user`(`UserName`, `Password`, `RoleID`, `FullName`,`Phone`, `Email`, `Gender`, `Address`, `create_at`) VALUES (?,?,?,?,?,?,?,?,?)";
+    $values1 = [$data['username'], $enc_pass, 1, $data['FullName'], $data['phonenum'], $data['email'], $data['gender'], $data['address'], $createAt];
+    if (insert($query1, $values1, 'ssissssss')) {
         echo 1;
     } else {
         echo 'ins_failed';

@@ -123,7 +123,7 @@
                     toast('error', "Phone number is already registered!");
                 } else if (this.responseText == "ins_failed") {
                     toast('error', "Registration failed! Server down!");
-                } else if (this.responseText == 11) {
+                } else if (this.responseText == 1) {
                     var myModal = document.getElementById('registerModal');
                     var modal = bootstrap.Modal.getInstance(myModal);
                     modal.hide();
